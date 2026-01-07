@@ -1,0 +1,2 @@
+# AsistenciaQR
+Asistencia para alumnos
