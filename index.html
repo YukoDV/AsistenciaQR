@@ -88,13 +88,15 @@
   </footer>
 
   <script>
-    const form = document.getElementById("formAsistencia");
-    const mensaje = document.getElementById("mensajeExito");
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById("formAsistencia");
+      const mensaje = document.getElementById("mensajeExito");
 
-    form.addEventListener("submit", function(event) {
-      event.preventDefault(); // evita que recargue la página
-      mensaje.style.display = "block"; // muestra el mensaje
-      form.reset(); // limpia los campos
+      form.addEventListener("submit", function(event) {
+        event.preventDefault(); // evita recargar la página
+        mensaje.style.display = "block"; // muestra el mensaje
+        form.reset(); // limpia los campos
+      });
     });
   </script>
 </body>
