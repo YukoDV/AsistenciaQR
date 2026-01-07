@@ -11,26 +11,15 @@
       text-align: center;
       padding: 40px;
     }
-
-    h1 {
-      color: #1a4e8a;
-      margin-bottom: 10px;
-    }
-
-    p {
-      color: #555;
-      margin-bottom: 30px;
-    }
-
+    h1 { color: #1a4e8a; }
     form {
-      background: #ffffff;
+      background: #fff;
       padding: 30px;
       border-radius: 10px;
       display: inline-block;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
       max-width: 400px;
     }
-
     input {
       margin: 12px 0;
       padding: 10px;
@@ -39,7 +28,6 @@
       border-radius: 5px;
       font-size: 16px;
     }
-
     button {
       padding: 12px 25px;
       background: #2ecc71;
@@ -50,22 +38,18 @@
       cursor: pointer;
       margin-top: 20px;
     }
-
-    button:hover {
-      background: #27ae60;
-    }
-
-    .mensaje {
+    button:hover { background: #27ae60; }
+    #mensajeExito {
       margin-top: 20px;
       color: #2ecc71;
       font-weight: bold;
       display: none;
     }
-
-    footer {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #888;
+    #mensajeError {
+      margin-top: 20px;
+      color: #e74c3c;
+      font-weight: bold;
+      display: none;
     }
   </style>
 </head>
@@ -79,25 +63,29 @@
     <button type="submit">Registrar</button>
   </form>
 
-  <div class="mensaje" id="mensajeExito">
-    ✅ ¡La información se envió correctamente!
-  </div>
-
-  <footer>
-    &copy; 2026 AsistenciaQR
-  </footer>
+  <div id="mensajeExito">✅ ¡La información se envió correctamente!</div>
+  <div id="mensajeError">⚠️ Solo puedes registrar tu asistencia una vez por visita.</div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const form = document.getElementById("formAsistencia");
-      const mensaje = document.getElementById("mensajeExito");
+    let registrado = false; // variable en memoria, se reinicia al recargar
 
-      form.addEventListener("submit", function(event) {
-        event.preventDefault(); // evita recargar la página
-        mensaje.style.display = "block"; // muestra el mensaje
-        form.reset(); // limpia los campos
-      });
-    });
+    const form = document.getElementById("formAsistencia");
+    const mensajeExito = document.getElementById("mensajeExito");
+    const mensajeError = document.getElementById("mensajeError");
+
+    form.onsubmit = function(e) {
+      e.preventDefault();
+
+      if (registrado) {
+        mensajeError.style.display = "block";
+        mensajeExito.style.display = "none";
+      } else {
+        mensajeExito.style.display = "block";
+        mensajeError.style.display = "none";
+        form.reset();
+        registrado = true; // marca que ya se registró en esta visita
+      }
+    };
   </script>
 </body>
 </html>
